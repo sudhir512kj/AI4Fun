@@ -302,9 +302,9 @@ class Critic:
 
 		print('\n')
 		print(board[0][0] + '|' + board[0][1] + '|' + board[0][2])
-		print("--------")
+		print("-----")
 		print(board[1][0] + '|' + board[1][1] + '|' + board[1][2])
-		print("--------")
+		print("-----")
 		print(board[2][0] + '|' + board[2][1] + '|' + board[2][2])
 		print('\n')
 
@@ -356,7 +356,7 @@ def train(numTrainingSamples = 10):
 
 	# Training phase (Indirect Feedback via Computer v/s Computer)
 	trainingGameCount = 0
-	playerSymbols = ('p1','p2')
+	playerSymbols = ('X','O')
 	playersTargetFunctionWeightVectors = [np.array([.5,.5,.5,.5,.5,.5,.5]),np.array([.5,.5,.5,.5,.5,.5,.5])]
 	gameStatusCount = [0,0,0]
 	#initWeight = playersTargetFunctionWeightVectors[0]
@@ -406,10 +406,10 @@ def train(numTrainingSamples = 10):
 		experimentGenerator = ExperimentGenerator()
 		boardState = experimentGenerator.generateNewProblem()
 		gameStatusFlag = True
-		computer = Player('C',learntWeight)
+		computer = Player('X',learntWeight)
 		gameHistory = []
 
-		print('\nBegin Computer(C) v/s Human(H) Tic-Tac-Toe\n')
+		print('\nBegin Computer(X) v/s Human(O) Tic-Tac-Toe\n')
 		while(gameStatusFlag):
 			
 			boardState = computer.chooseMove(boardState,computer.playerSymbol,'H')
@@ -426,7 +426,7 @@ def train(numTrainingSamples = 10):
 			print('Enter Y-coordinate(0-2):')
 			y = int(input())
 		
-			boardState[x][y] = 'H'
+			boardState[x][y] = 'O'
 			computer.boardPrint(boardState)
 			gameHistory.append(boardState)
 			gameStatusFlag =  not computer.isGameOver(boardState,'H')
